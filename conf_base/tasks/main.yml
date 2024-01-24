@@ -1,0 +1,44 @@
+---
+
+  - name: Configure the hostname
+    ios_config:
+      lines: hostname {{ inventory_hostname }}
+
+  - name: Configure the domain-name
+    ios_system:
+      domain_name: aklesso.tg
+
+  - name: Configure the dns lookup sources
+    ios_system:
+      lookup_enabled: yes
+
+  - name: Configure the motd banner
+    ios_banner:
+      banner: motd
+      text: "WEELCOME TO THIS LAB"
+      state: present
+
+  - name: Configure the login banner
+    ios_banner:
+      banner: login
+      text: |
+        BANNER LOG
+        LOGIN
+        PLEASE
+      state: present
+
+  - name: Configure the users
+    ios_config:
+      lines:
+      - username admin password admin
+
+  - name: Configure the password encryption
+    ios_config:
+      lines:
+      - service password-encryption
+
+  - name: save configuration 
+    ios_config:
+      save_when: changed
+
+

@@ -1,0 +1,16 @@
+---
+
+  - name: base configuration
+    hosts: all
+    gather_facts: false
+
+    pre_tasks:
+      - debug:
+          msg: "debut de la configuration."
+   
+    roles:
+      - conf_base
+
+    post_tasks:
+      - debug:
+          msg: "hosts configures."
